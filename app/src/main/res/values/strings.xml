@@ -1,9 +1,32 @@
 <resources>
     <string name="app_name">Basketball Scoreboard</string>
-    <string name="placeholder2">88</string>
+    <string name="placeholder2">188</string>
     <string name="placeholder4">88:88</string>
+
+
+    <!--Headings-->
     <string name="home_title">Home</string>
     <string name="guest_title">Guest</string>
-    <string name="reset">Reset</string>
+    <string name="period_heading">Period</string>
+    <string name="fouls_heading">Fouls</string>
+    <string name="timeouts_heading">Timeouts</string>
+
+    <!--Starting Values-->
+    <string name="starting_period">1</string>
+    <string name="starting_time">12:00</string>
+    <string name="starting_score">\t\t\t\t\t\t00</string>
+    <string name="starting_shotclock">24</string>
+    <string name="starting_fouls">0</string>
+    <string name="starting_timeouts">6</string>
+
+    <!--Buttons-->
+    <string name="minus">-</string>
+    <string name="plus">+</string>
     <string name="_14">14</string>
+    <string name="reset">Reset</string>
+    <string name="reset_score">Reset score</string>
+    <string name="reset_all">Reset all</string>
+    <string name="reset_time">Reset time</string>
+
+
 </resources>

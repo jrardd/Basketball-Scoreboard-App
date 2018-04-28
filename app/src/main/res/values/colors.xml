@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="score_color">#ffd900</color>
+    <color name="shotclock_color">#ff0000</color>
+    <color name="heading_color">#fff</color>
+    <color name="stat_color">#08ff00</color>
+    <color name="stat_box_color">#161616</color>
 </resources>

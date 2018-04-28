@@ -12,7 +12,8 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final long MAIN_START_TIME_MILLI = 720000;
+
+    private static final long MAIN_START_TIME_MILLI = 720000;           //Starting time constants
     private static final long SHOT_CLOCK_START_TIME_MILLI = 24000;
 
     private TextView mainClock;
@@ -26,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
 
     private long mainTimeLeftMilli = MAIN_START_TIME_MILLI;
     private long shotClockTimeLeftMilli = SHOT_CLOCK_START_TIME_MILLI;
+
+    private int homeScore = 0;
+    private int awayScore = 0;
+    private int fouls = 0;
+    private int timeouts = 6;
+    private int period = 1;
 
 
     @Override
@@ -77,6 +84,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //The next few methods are used for the main clock and shot clock.
+
+    /*
+     Initialize main clock CountDownTimer with one second (1000 millisecond) ticks.
+     startMainClock()
+     returns: void
+     */
+
     public void startMainClock() {
 
         mCountDownTimer = new CountDownTimer(mainTimeLeftMilli, 1000) {
@@ -95,6 +110,12 @@ public class MainActivity extends AppCompatActivity {
 
         isMainClockRunning = true;
     }
+
+    /*
+     Initialize shot clock CountDownTimer with one second (1000 millisecond) ticks.
+     startShotClock()
+     returns: void
+     */
 
     public void startShotClock() {
 
@@ -117,12 +138,24 @@ public class MainActivity extends AppCompatActivity {
         isShotClockRunning = true;
     }
 
+    /*
+     Pause all clocks
+     pauseTimer()
+     returns: void
+     */
+
     public void pauseTimer() {
         mCountDownTimer.cancel();
         sCountDownTimer.cancel();
         isMainClockRunning = false;
         isShotClockRunning = false;
     }
+
+    /*
+     Reset the main clock to starting time value (12 Minutes).
+     resetMainClock()
+     returns: void
+     */
 
     public void resetMainClock() {
         if (isMainClockRunning) {
@@ -135,6 +168,13 @@ public class MainActivity extends AppCompatActivity {
             updateMainClock();
         }
     }
+
+    /*
+     Reset the shot clock to starting time value (24 seconds).
+     If the main clock is less than 24 seconds, the shot clock will match the main clock instead.
+     resetShotClock()
+     returns: void
+     */
 
     public void resetShotClock() {
 
@@ -164,6 +204,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     Sets the shot clock to 14 seconds.
+     setFourteen()
+     returns: void
+     */
+
     public void setFourteen() {
         if (isShotClockRunning) {
             sCountDownTimer.cancel();
@@ -176,14 +222,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     Updates the main clock TextView with formatted time string (00:00)
+     updateMainClock()
+     returns: void
+     */
+
     public void updateMainClock() {
         int minutes = (int) (mainTimeLeftMilli / 1000) / 60;
         int seconds = (int) (mainTimeLeftMilli / 1000) % 60;
 
         String timeFormat = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
         mainClock.setText(timeFormat);
-        
+
     }
+
+    /*
+     Updates the shot clock TextView with formatted time string (00)
+     updateMainClock()
+     returns: void
+     */
 
     public void updateShotClock() {
         int seconds = (int) (shotClockTimeLeftMilli / 1000) % 60;
@@ -193,5 +251,85 @@ public class MainActivity extends AppCompatActivity {
         shotClock.setText(timeFormat);
 
     }
+
+
+    //The next few methods are used for the period, scoring, fouls, and timeouts.
+
+
+    public void addHomeScore(View view) {
+        homeScore++;
+        updateHomeScore();
+    }
+
+    public void minusHomeScore(View view) {
+        if (homeScore > 0) {
+            homeScore--;
+        }
+        updateHomeScore();
+    }
+
+    public void updateHomeScore(){
+        TextView homeScoreText = findViewById(R.id.home_score);
+
+        if(homeScore < 100){
+            String scoreFormat = String.format(Locale.getDefault(), "\t\t\t\t\t\t"+ "%02d", homeScore);
+            homeScoreText.setText(scoreFormat);
+
+        }
+
+        else {
+            String scoreFormat = String.format(Locale.getDefault(), "%03d", homeScore);
+            homeScoreText.setText(scoreFormat);
+        }
+
+    }
+
+    public void addAwayScore(View view) {
+        awayScore++;
+        updateAwayScore();
+    }
+
+    public void minusAwayScore(View view) {
+        if (awayScore > 0) {
+            awayScore--;
+        }
+        updateAwayScore();
+    }
+
+    public void updateAwayScore() {
+        TextView awayScoreText = findViewById(R.id.away_score);
+
+        if(awayScore < 100){
+            String scoreFormat = String.format(Locale.getDefault(), "\t\t\t\t\t\t"+ "%02d", awayScore);
+            awayScoreText.setText(scoreFormat);
+
+        }
+
+        else {
+            String scoreFormat = String.format(Locale.getDefault(), "%02d", awayScore);
+            awayScoreText.setText(scoreFormat);
+        }
+    }
+
+    public void addPeriod(View view) {
+        if (period < 4) {
+            period++;
+        }
+        updatePeriod();
+    }
+
+    public void minusPeriod(View view) {
+        if (period > 1) {
+            period--;
+        }
+        updatePeriod();
+    }
+
+    public void updatePeriod() {
+        TextView periodText = findViewById(R.id.period_number);
+        String periodString = String.valueOf(period);
+        periodText.setText(periodString);
+    }
+
 
 }

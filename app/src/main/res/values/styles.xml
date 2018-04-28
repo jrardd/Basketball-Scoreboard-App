@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name = "stat_numbers" parent = "TextAppearance.AppCompat">
+        <item name = "android:textColor">@color/stat_color</item>
+        <item name = "android:textSize">30sp</item>
+        <item name = "android:background">@color/stat_box_color</item>
+        <item name = "android:padding">10dp</item>
+        <item name = "android:layout_marginTop">10dp</item>
+    </style>
+
 </resources>
