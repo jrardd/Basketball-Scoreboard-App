@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context="com.example.android.basketballscoreboard.MainActivity">
+
+    <TextView
+        android:id="@+id/period"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:text="Period"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".35" />
+
+    <TextView
+        android:id="@+id/period_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#161616"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="10dp"
+        android:text="1"
+        android:textAllCaps="true"
+        android:textColor="#08ff00"
+        android:textSize="50sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/period" />
+
+    <ImageButton
+        android:id="@+id/left_period_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/period_btn"
+        android:rotation="180"
+        app:layout_constraintEnd_toStartOf="@id/right_period_btn"
+        app:layout_constraintStart_toStartOf="@id/period"
+        app:layout_constraintTop_toBottomOf="@id/period_number" />
+
+    <ImageButton
+        android:id="@+id/right_period_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/period_btn"
+        app:layout_constraintEnd_toEndOf="@id/period"
+        app:layout_constraintStart_toEndOf="@id/left_period_btn"
+        app:layout_constraintTop_toBottomOf="@id/period_number" />
+
+
+    <TextView
+        android:id="@+id/main_clock_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/main_clock_border"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="20dp"
+        android:text="@string/placeholder4"
+        android:textColor="#1d1611"
+        android:textSize="120sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/main_clock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="20dp"
+        android:shadowColor="#ff8000"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="32"
+        android:text="12:00"
+        android:textColor="#ff6f00"
+        android:textSize="120sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/home_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/home_title"
+        android:textAllCaps="true"
+        android:textColor="#fff"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@id/away_title"
+        app:layout_constraintHorizontal_bias=".2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_clock" />
+
+    <TextView
+        android:id="@+id/away_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/guest_title"
+        android:textAllCaps="true"
+        android:textColor="#fff"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@id/home_title"
+        app:layout_constraintTop_toBottomOf="@id/main_clock" />
+
+    <TextView
+        android:id="@+id/home_score_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="20dp"
+        android:text="@string/placeholder2"
+        android:textColor="#18160e"
+        android:textSize="100sp"
+        app:layout_constraintEnd_toStartOf="@id/away_title"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_title" />
+
+    <TextView
+        android:id="@+id/away_score_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="20dp"
+        android:text="@string/placeholder2"
+        android:textColor="#28261c"
+        android:textSize="100sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/home_title"
+        app:layout_constraintTop_toBottomOf="@id/away_title" />
+
+    <TextView
+        android:id="@+id/home_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="20dp"
+        android:shadowColor="#ffd900"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="24"
+        android:text="12"
+        android:textColor="#ffd900"
+        android:textSize="100sp"
+        app:layout_constraintEnd_toStartOf="@+id/away_title"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_title" />
+
+    <TextView
+        android:id="@+id/away_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="20dp"
+        android:shadowColor="#ffd900"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="24"
+        android:text="39"
+        android:textColor="#ffd900"
+        android:textSize="100sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/home_title"
+        app:layout_constraintTop_toBottomOf="@id/away_title" />
+
+
+    <Button
+        android:id="@+id/minus_home_score"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/score_btn"
+        android:text="-"
+        android:textColor="#ffd900"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@id/add_home_score"
+        app:layout_constraintStart_toStartOf="@id/home_score"
+        app:layout_constraintTop_toBottomOf="@id/home_score" />
+
+    <Button
+        android:id="@+id/add_home_score"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/score_btn"
+        android:text="+"
+        android:textColor="#ffd900"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="@id/home_score"
+        app:layout_constraintStart_toEndOf="@id/minus_home_score"
+        app:layout_constraintTop_toBottomOf="@id/home_score" />
+
+    <Button
+        android:id="@+id/minus_away_score"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/score_btn"
+        android:text="-"
+        android:textColor="#ffd900"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@id/add_away_score"
+        app:layout_constraintStart_toStartOf="@id/away_score"
+        app:layout_constraintTop_toBottomOf="@id/home_score" />
+
+    <Button
+        android:id="@+id/add_away_score"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/score_btn"
+        android:text="+"
+        android:textColor="#ffd900"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="@id/away_score"
+        app:layout_constraintStart_toEndOf="@id/minus_away_score"
+        app:layout_constraintTop_toBottomOf="@id/home_score" />
+
+    <TextView
+        android:id="@+id/shot_clock_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shotclock_border"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="20dp"
+        android:text="@string/placeholder2"
+        android:textColor="#1d1414"
+        android:textSize="100sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_home_score" />
+
+    <TextView
+        android:id="@+id/shot_clock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="20dp"
+        android:shadowColor="#ff0000"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="32"
+        android:text="24"
+        android:textColor="#ff0400"
+        android:textSize="100sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_home_score" />
+
+    <Button
+        android:id="@+id/set_14"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shotclock_btn1"
+        android:text="@string/_14"
+        android:textColor="#ff0400"
+        android:textSize="18sp"
+        app:layout_constraintHorizontal_bias=".41"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/shot_clock" />
+
+    <ImageButton
+        android:id="@+id/reset_shotclock_btn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shotclock_btn1"
+        android:src="@drawable/restart_icon"
+        android:textColor="#ff0400"
+        app:layout_constraintHorizontal_bias=".57"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/shot_clock" />
+
+    <TextView
+        android:id="@+id/home_fouls_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fouls"
+        android:textAllCaps="true"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="@id/minus_home_score"
+        app:layout_constraintTop_toTopOf="@id/shot_clock" />
+
+    <TextView
+        android:id="@+id/away_fouls_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fouls"
+        android:textAllCaps="true"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintRight_toRightOf="@id/add_away_score"
+        app:layout_constraintTop_toTopOf="@id/shot_clock" />
+
+    <TextView
+        android:id="@+id/home_fouls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#161616"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="10dp"
+        android:text="0"
+        android:textColor="#08ff00"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="@id/home_fouls_title"
+        app:layout_constraintRight_toRightOf="@id/home_fouls_title"
+        app:layout_constraintTop_toBottomOf="@id/home_fouls_title" />
+
+    <TextView
+        android:id="@+id/away_fouls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#161616"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="10dp"
+        android:text="0"
+        android:textColor="#08ff00"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="@id/away_fouls_title"
+        app:layout_constraintRight_toRightOf="@id/away_fouls_title"
+        app:layout_constraintTop_toBottomOf="@id/away_fouls_title" />
+
+    <TextView
+        android:id="@+id/home_timeouts_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timeouts"
+        android:textAllCaps="true"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/shot_clock"
+        app:layout_constraintLeft_toLeftOf="@id/home_fouls_title"
+        app:layout_constraintRight_toRightOf="@id/home_fouls_title" />
+
+    <TextView
+        android:id="@+id/away_timeouts_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timeouts"
+        android:textAllCaps="true"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/shot_clock"
+        app:layout_constraintLeft_toLeftOf="@id/away_fouls_title"
+        app:layout_constraintRight_toRightOf="@id/away_fouls_title" />
+
+    <TextView
+        android:id="@+id/home_timeouts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#161616"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="10dp"
+        android:text="6"
+        android:textColor="#08ff00"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="@id/home_timeouts_title"
+        app:layout_constraintRight_toRightOf="@id/home_timeouts_title"
+        app:layout_constraintTop_toBottomOf="@id/home_timeouts_title" />
+
+    <TextView
+        android:id="@+id/away_timeouts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#161616"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="10dp"
+        android:text="6"
+        android:textColor="#08ff00"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="@id/away_timeouts_title"
+        app:layout_constraintRight_toRightOf="@id/away_timeouts_title"
+        app:layout_constraintTop_toBottomOf="@id/away_timeouts_title" />
+
+
+    <Button
+        android:id="@+id/reset_score_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/restart_btn"
+        android:padding="10dp"
+        android:text="Reset score"
+        android:textColor="#fff"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageButton
+        android:id="@+id/start_pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/restart_btn"
+        android:padding="20dp"
+        android:src="@drawable/triangle"
+        android:text="Reset all"
+        android:textColor="#fff"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/reset_time_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/restart_btn"
+        android:padding="10dp"
+        android:text="Reset time"
+        android:textColor="#fff"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/fouls_timeouts_btn"
+        android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="@id/home_fouls"
+        app:layout_constraintRight_toLeftOf="@id/home_fouls"
+        app:layout_constraintTop_toTopOf="@id/home_fouls" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/fouls_timeouts_btn"
+        app:layout_constraintBottom_toBottomOf="@id/home_fouls"
+        app:layout_constraintLeft_toRightOf="@id/home_fouls"
+        app:layout_constraintTop_toTopOf="@id/home_fouls" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/fouls_timeouts_btn"
+        android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="@id/away_fouls"
+        app:layout_constraintRight_toLeftOf="@id/away_fouls"
+        app:layout_constraintTop_toTopOf="@id/away_fouls" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/fouls_timeouts_btn"
+        app:layout_constraintBottom_toBottomOf="@id/away_fouls"
+        app:layout_constraintLeft_toRightOf="@id/away_fouls"
+        app:layout_constraintTop_toTopOf="@id/away_fouls" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/fouls_timeouts_btn"
+        android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="@id/home_timeouts"
+        app:layout_constraintRight_toLeftOf="@id/home_timeouts"
+        app:layout_constraintTop_toTopOf="@id/home_timeouts" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/fouls_timeouts_btn"
+        app:layout_constraintBottom_toBottomOf="@id/home_timeouts"
+        app:layout_constraintLeft_toRightOf="@id/home_timeouts"
+        app:layout_constraintTop_toTopOf="@id/home_timeouts" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/fouls_timeouts_btn"
+        android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="@id/away_timeouts"
+        app:layout_constraintRight_toLeftOf="@id/away_timeouts"
+        app:layout_constraintTop_toTopOf="@id/away_timeouts" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/fouls_timeouts_btn"
+        app:layout_constraintBottom_toBottomOf="@id/away_timeouts"
+        app:layout_constraintLeft_toRightOf="@id/away_timeouts"
+        app:layout_constraintTop_toTopOf="@id/away_timeouts" />
+
+    <ImageButton
+        android:background="@drawable/sound_icon"
+        app:layout_constraintLeft_toLeftOf="@id/main_clock"
+        app:layout_constraintRight_toRightOf="@id/main_clock"
+        app:layout_constraintTop_toBottomOf="@id/main_clock"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</android.support.constraint.ConstraintLayout>
