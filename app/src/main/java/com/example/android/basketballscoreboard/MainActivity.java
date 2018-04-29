@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -29,9 +30,13 @@ public class MainActivity extends AppCompatActivity {
     private long shotClockTimeLeftMilli = SHOT_CLOCK_START_TIME_MILLI;
 
     private int homeScore = 0;
+    private int homeFouls = 0;
+    private int homeTimeouts = 6;
+
     private int awayScore = 0;
-    private int fouls = 0;
-    private int timeouts = 6;
+    private int awayFouls = 0;
+    private int awayTimeouts = 6;
+
     private int period = 1;
 
 
@@ -43,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         mainClock = findViewById(R.id.main_clock);
         shotClock = findViewById(R.id.shot_clock);
 
-        ImageButton startPause = findViewById(R.id.start_pause);
+        CheckBox startPause = findViewById(R.id.start_pause);
         ImageButton resetShotClock = findViewById(R.id.reset_shotclock_btn);
         Button setFourteenButton = findViewById(R.id.set_14);
         Button resetTimers = findViewById(R.id.reset_time_btn);
@@ -268,16 +273,14 @@ public class MainActivity extends AppCompatActivity {
         updateHomeScore();
     }
 
-    public void updateHomeScore(){
+    public void updateHomeScore() {
         TextView homeScoreText = findViewById(R.id.home_score);
 
-        if(homeScore < 100){
-            String scoreFormat = String.format(Locale.getDefault(), "\t\t\t\t\t\t"+ "%02d", homeScore);
+        if (homeScore < 100) {
+            String scoreFormat = String.format(Locale.getDefault(), "\t\t\t\t\t\t" + "%02d", homeScore);
             homeScoreText.setText(scoreFormat);
 
-        }
-
-        else {
+        } else {
             String scoreFormat = String.format(Locale.getDefault(), "%03d", homeScore);
             homeScoreText.setText(scoreFormat);
         }
@@ -299,13 +302,11 @@ public class MainActivity extends AppCompatActivity {
     public void updateAwayScore() {
         TextView awayScoreText = findViewById(R.id.away_score);
 
-        if(awayScore < 100){
-            String scoreFormat = String.format(Locale.getDefault(), "\t\t\t\t\t\t"+ "%02d", awayScore);
+        if (awayScore < 100) {
+            String scoreFormat = String.format(Locale.getDefault(), "\t\t\t\t\t\t" + "%02d", awayScore);
             awayScoreText.setText(scoreFormat);
 
-        }
-
-        else {
+        } else {
             String scoreFormat = String.format(Locale.getDefault(), "%02d", awayScore);
             awayScoreText.setText(scoreFormat);
         }
@@ -329,6 +330,100 @@ public class MainActivity extends AppCompatActivity {
         TextView periodText = findViewById(R.id.period_number);
         String periodString = String.valueOf(period);
         periodText.setText(periodString);
+    }
+
+    public void addHomeFoul(View view) {
+        homeFouls++;
+        updateHomeFoul();
+    }
+
+    public void minusHomeFoul(View view) {
+        if (homeFouls > 0) {
+            homeFouls--;
+        }
+        updateHomeFoul();
+    }
+
+    public void updateHomeFoul() {
+        TextView homeFoulText = findViewById(R.id.home_fouls);
+        String homeFoulString = String.valueOf(homeFouls);
+        homeFoulText.setText(homeFoulString);
+    }
+
+    public void addAwayFoul(View view) {
+        awayFouls++;
+        updateAwayFoul();
+    }
+
+    public void minusAwayFoul(View view) {
+        if (awayFouls > 0) {
+            awayFouls--;
+        }
+        updateAwayFoul();
+    }
+
+    public void updateAwayFoul() {
+        TextView awayFoulText = findViewById(R.id.away_fouls);
+        String awayFoulString = String.valueOf(awayFouls);
+        awayFoulText.setText(awayFoulString);
+    }
+
+    public void addHomeTimeout(View view) {
+        if(homeTimeouts < 6){
+            homeTimeouts++;
+        }
+        updateHomeTimeout();
+    }
+
+    public void minusHomeTimeout(View view) {
+        if (homeTimeouts > 0) {
+            homeTimeouts--;
+        }
+        updateHomeTimeout();
+    }
+
+    public void updateHomeTimeout() {
+        TextView homeTimeoutText = findViewById(R.id.home_timeouts);
+        String homeTimeoutString = String.valueOf(homeTimeouts);
+        homeTimeoutText.setText(homeTimeoutString);
+    }
+
+    public void addAwayTimeout(View view) {
+        if (awayTimeouts < 6) {
+            awayTimeouts++;
+        }
+        updateAwayTimeout();
+    }
+
+    public void minusAwayTimeout(View view) {
+        if (awayTimeouts > 0) {
+            awayTimeouts--;
+        }
+        updateAwayTimeout();
+    }
+
+    public void updateAwayTimeout() {
+        TextView awayTimeoutText = findViewById(R.id.away_timeouts);
+        String awayTimeoutString = String.valueOf(awayTimeouts);
+        awayTimeoutText.setText(awayTimeoutString);
+    }
+
+    public void resetScore(View view) {
+        homeScore = 0;
+        homeFouls = 0;
+        homeTimeouts = 6;
+        awayScore = 0;
+        awayFouls = 0;
+        awayTimeouts = 6;
+        period = 1;
+
+        updateHomeScore();
+        updateHomeFoul();
+        updateHomeTimeout();
+        updateAwayScore();
+        updateAwayFoul();
+        updateAwayTimeout();
+        updatePeriod();
     }
 
 
