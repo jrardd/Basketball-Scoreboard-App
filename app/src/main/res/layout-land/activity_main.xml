@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context="com.example.android.basketballscoreboard.MainActivity">
+
+    <TextView
+        android:id="@+id/period"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/period_heading"
+        android:textAllCaps="true"
+        android:textColor="@color/heading_color"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/period_number"
+        app:layout_constraintStart_toStartOf="@id/period_number"
+        app:layout_constraintTop_toBottomOf="@id/period_number" />
+
+    <TextView
+        android:id="@+id/period_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/stat_box_color"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="10dp"
+        android:text="@string/starting_period"
+        android:textAllCaps="true"
+        android:textColor="@color/stat_color"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toStartOf="@id/main_clock"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/main_clock" />
+
+    <ImageButton
+        android:id="@+id/left_period_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/period_btn"
+        android:onClick="minusPeriod"
+        android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="@id/period_number"
+        app:layout_constraintEnd_toStartOf="@id/period_number"
+        app:layout_constraintTop_toTopOf="@id/period_number" />
+
+    <ImageButton
+        android:id="@+id/right_period_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/period_btn"
+        android:onClick="addPeriod"
+        app:layout_constraintBottom_toBottomOf="@id/period_number"
+        app:layout_constraintStart_toEndOf="@id/period_number"
+        app:layout_constraintTop_toTopOf="@id/period_number" />
+
+
+    <TextView
+        android:id="@+id/main_clock_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="10dp"
+        android:text="@string/placeholder4"
+        android:textColor="#1d1611"
+        android:textSize="150sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/main_clock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="10dp"
+        android:shadowColor="#ff6f00"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="40"
+        android:text="@string/starting_time"
+        android:textColor="#ff6f00"
+        android:textSize="150sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/home_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_title"
+        android:textAllCaps="true"
+        android:textColor="@color/heading_color"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@id/shot_clock"
+        app:layout_constraintHorizontal_bias=".7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reset_shotclock_btn" />
+
+    <TextView
+        android:id="@+id/away_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/guest_title"
+        android:textAllCaps="true"
+        android:textColor="@color/heading_color"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".3"
+        app:layout_constraintStart_toEndOf="@id/shot_clock"
+        app:layout_constraintTop_toBottomOf="@id/reset_shotclock_btn" />
+
+
+    <TextView
+        android:id="@+id/home_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/digitaldismay"
+        android:paddingRight="20dp"
+        android:paddingVertical="20dp"
+        android:shadowColor="@color/score_color"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="24"
+        android:text="@string/starting_score"
+        android:textColor="@color/score_color"
+        android:textSize="150sp"
+        app:layout_constraintBottom_toBottomOf="@id/reset_shotclock_btn"
+        app:layout_constraintEnd_toStartOf="@id/shot_clock"
+        app:layout_constraintHorizontal_bias=".8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/shot_clock"
+        app:layout_constraintVertical_bias=".8" />
+
+    <TextView
+        android:id="@+id/away_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/digitaldismay"
+        android:paddingRight="20dp"
+        android:paddingVertical="20dp"
+        android:shadowColor="@color/score_color"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="24"
+        android:text="@string/starting_score"
+        android:textColor="@color/score_color"
+        android:textSize="150sp"
+        app:layout_constraintBottom_toBottomOf="@id/reset_shotclock_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".65"
+        app:layout_constraintStart_toStartOf="@id/shot_clock"
+        app:layout_constraintTop_toTopOf="@id/shot_clock"
+        app:layout_constraintVertical_bias=".8" />
+
+
+    <Button
+        android:id="@+id/minus_home_score"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/score_btn"
+        android:onClick="minusHomeScore"
+        android:text="@string/minus"
+        android:textColor="@color/score_color"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="@id/add_home_score"
+        app:layout_constraintTop_toBottomOf="@id/add_home_score" />
+
+    <Button
+        android:id="@+id/add_home_score"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/score_btn"
+        android:onClick="addHomeScore"
+        android:text="@string/plus"
+        android:textColor="@color/score_color"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@id/home_score"
+        app:layout_constraintEnd_toStartOf="@id/home_title"
+        app:layout_constraintHorizontal_bias=".15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/home_score"
+        app:layout_constraintVertical_bias=".3" />
+
+    <Button
+        android:id="@+id/minus_away_score"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/score_btn"
+        android:onClick="minusAwayScore"
+        android:text="@string/minus"
+        android:textColor="@color/score_color"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="@id/add_away_score"
+        app:layout_constraintTop_toBottomOf="@id/add_away_score" />
+
+    <Button
+        android:id="@+id/add_away_score"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/score_btn"
+        android:onClick="addAwayScore"
+        android:text="@string/plus"
+        android:textColor="@color/score_color"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@id/home_score"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".7"
+        app:layout_constraintStart_toEndOf="@id/away_title"
+        app:layout_constraintTop_toTopOf="@id/home_score"
+        app:layout_constraintVertical_bias=".3" />
+
+    <TextView
+        android:id="@+id/shot_clock_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="20dp"
+        android:text="88"
+        android:textColor="#1d1414"
+        android:textSize="140sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_clock" />
+
+    <TextView
+        android:id="@+id/shot_clock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/digitaldismay"
+        android:padding="20dp"
+        android:shadowColor="@color/shotclock_color"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="32"
+        android:text="@string/starting_shotclock"
+        android:textColor="@color/shotclock_color"
+        android:textSize="140sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_clock" />
+
+    <Button
+        android:id="@+id/set_14"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shotclock_btn"
+        android:text="@string/_14"
+        android:textColor="@color/shotclock_color"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/reset_shotclock_btn"
+        app:layout_constraintStart_toStartOf="@id/shot_clock"
+        app:layout_constraintTop_toBottomOf="@id/shot_clock" />
+
+    <ImageButton
+        android:id="@+id/reset_shotclock_btn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shotclock_btn"
+        android:src="@drawable/restart_icon"
+        android:textColor="@color/shotclock_color"
+        app:layout_constraintEnd_toEndOf="@id/shot_clock"
+        app:layout_constraintStart_toEndOf="@id/set_14"
+        app:layout_constraintTop_toBottomOf="@id/shot_clock" />
+
+
+    <Button
+        android:id="@+id/reset_score_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/reset_btn"
+        android:onClick="resetScore"
+        android:padding="10dp"
+        android:text="@string/reset_score"
+        android:textColor="@color/heading_color"
+        android:textSize="12dp"
+        app:layout_constraintLeft_toLeftOf="@id/period"
+        app:layout_constraintRight_toRightOf="@id/period"
+        app:layout_constraintTop_toBottomOf="@id/period" />
+
+    <CheckBox
+        android:id="@+id/start_pause"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:foreground="@drawable/play_pause_btn"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/main_clock"
+        app:layout_constraintTop_toTopOf="@id/main_clock" />
+
+    <Button
+        android:id="@+id/reset_time_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/reset_btn"
+        android:padding="10dp"
+        android:text="@string/reset_time"
+        android:textColor="@color/heading_color"
+        android:textSize="12dp"
+        app:layout_constraintLeft_toLeftOf="@id/start_pause"
+        app:layout_constraintRight_toRightOf="@id/start_pause"
+        app:layout_constraintTop_toBottomOf="@id/start_pause" />
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@drawable/circle"
+        android:src="@drawable/sound_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

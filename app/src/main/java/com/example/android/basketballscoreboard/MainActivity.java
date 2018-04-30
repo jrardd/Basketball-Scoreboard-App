@@ -14,8 +14,8 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
 
-    private static final long MAIN_START_TIME_MILLI = 720000;           //Starting time constants
-    private static final long SHOT_CLOCK_START_TIME_MILLI = 24000;
+    private static final long MAIN_START_TIME_MILLI = 720000;           //Starting main clock time constant
+    private static final long SHOT_CLOCK_START_TIME_MILLI = 24000;     //Starting shot clock time constant
 
     private TextView mainClock;
     private TextView shotClock;
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton resetShotClock = findViewById(R.id.reset_shotclock_btn);
         Button setFourteenButton = findViewById(R.id.set_14);
         Button resetTimers = findViewById(R.id.reset_time_btn);
+
 
         startPause.setOnClickListener(new View.OnClickListener() {
 
@@ -150,10 +151,12 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void pauseTimer() {
+        CheckBox startPause = findViewById(R.id.start_pause);
         mCountDownTimer.cancel();
         sCountDownTimer.cancel();
         isMainClockRunning = false;
         isShotClockRunning = false;
+        startPause.setChecked(false);
     }
 
     /*
@@ -409,6 +412,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void resetScore(View view) {
+        boolean isPortrait = this.getResources().getBoolean(R.bool.is_portrait);
         homeScore = 0;
         homeFouls = 0;
         homeTimeouts = 6;
@@ -417,13 +421,23 @@ public class MainActivity extends AppCompatActivity {
         awayTimeouts = 6;
         period = 1;
 
-        updateHomeScore();
-        updateHomeFoul();
-        updateHomeTimeout();
-        updateAwayScore();
-        updateAwayFoul();
-        updateAwayTimeout();
-        updatePeriod();
+        if(isPortrait) {
+            updateHomeScore();
+            updateHomeFoul();
+            updateHomeTimeout();
+            updateAwayScore();
+            updateAwayFoul();
+            updateAwayTimeout();
+            updatePeriod();
+        }
+
+        else{
+            updateHomeScore();
+            updateAwayScore();
+            updatePeriod();
+        }
+
+
     }
 
 
