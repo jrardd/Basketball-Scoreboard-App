@@ -1,13 +1,16 @@
 package com.example.android.basketballscoreboard;
 
+import android.content.res.Configuration;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -19,10 +22,15 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mainClock;
     private TextView shotClock;
+    private CheckBox startPause;
+    private ImageButton resetShotClock;
+    private Button setFourteenButton;
+    private Button resetTimers;
 
     private CountDownTimer mCountDownTimer;
     private CountDownTimer sCountDownTimer;
 
+    private boolean isPortrait;
     private boolean isMainClockRunning;
     private boolean isShotClockRunning;
 
@@ -40,18 +48,19 @@ public class MainActivity extends AppCompatActivity {
     private int period = 1;
 
 
+    /*
+    Method called upon app startup
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mainClock = findViewById(R.id.main_clock);
         shotClock = findViewById(R.id.shot_clock);
-
-        CheckBox startPause = findViewById(R.id.start_pause);
-        ImageButton resetShotClock = findViewById(R.id.reset_shotclock_btn);
-        Button setFourteenButton = findViewById(R.id.set_14);
-        Button resetTimers = findViewById(R.id.reset_time_btn);
+        startPause = findViewById(R.id.start_pause);
+        resetShotClock = findViewById(R.id.reset_shotclock_btn);
+        setFourteenButton = findViewById(R.id.set_14);
+        resetTimers = findViewById(R.id.reset_time_btn);
 
 
         startPause.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (isMainClockRunning) {
                     pauseTimer();
+                    Log.i("Message", "Clicked");
                 } else {
                     startMainClock();
                     startShotClock();
@@ -88,6 +98,80 @@ public class MainActivity extends AppCompatActivity {
                 resetShotClock();
             }
         });
+    }
+
+
+    /*
+    Method called upon orientation change
+     */
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setContentView(R.layout.activity_main);
+        isPortrait = this.getResources().getBoolean(R.bool.is_portrait);
+        mainClock = findViewById(R.id.main_clock);
+        shotClock = findViewById(R.id.shot_clock);
+        startPause = findViewById(R.id.start_pause);
+        resetShotClock = findViewById(R.id.reset_shotclock_btn);
+        setFourteenButton = findViewById(R.id.set_14);
+        resetTimers = findViewById(R.id.reset_time_btn);
+        Toast toastMessage = new Toast(this);
+
+
+
+        if (isMainClockRunning) {
+            startPause.setChecked(true);
+        }
+
+        if (isPortrait) {
+            toastMessage.makeText(this, "Referee Mode",
+                    Toast.LENGTH_LONG).show();
+            updateAllPortrait();
+        } else {
+            toastMessage.makeText(this, "Free Mode",
+                    Toast.LENGTH_LONG).show();
+            updateAllLandscape();
+        }
+        updateMainClock();
+        updateShotClock();
+
+
+        startPause.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (isMainClockRunning) {
+                    pauseTimer();
+                    Log.i("Message", "Clicked");
+                } else {
+                    startMainClock();
+                    startShotClock();
+                }
+            }
+        });
+
+        resetShotClock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetShotClock();
+            }
+        });
+
+        setFourteenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFourteen();
+            }
+        });
+
+        resetTimers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetMainClock();
+                resetShotClock();
+            }
+        });
+
     }
 
     //The next few methods are used for the main clock and shot clock.
@@ -372,7 +456,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addHomeTimeout(View view) {
-        if(homeTimeouts < 6){
+        if (homeTimeouts < 6) {
             homeTimeouts++;
         }
         updateHomeTimeout();
@@ -412,7 +496,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void resetScore(View view) {
-        boolean isPortrait = this.getResources().getBoolean(R.bool.is_portrait);
+        isPortrait = this.getResources().getBoolean(R.bool.is_portrait);
         homeScore = 0;
         homeFouls = 0;
         homeTimeouts = 6;
@@ -421,23 +505,29 @@ public class MainActivity extends AppCompatActivity {
         awayTimeouts = 6;
         period = 1;
 
-        if(isPortrait) {
-            updateHomeScore();
-            updateHomeFoul();
-            updateHomeTimeout();
-            updateAwayScore();
-            updateAwayFoul();
-            updateAwayTimeout();
-            updatePeriod();
-        }
-
-        else{
-            updateHomeScore();
-            updateAwayScore();
-            updatePeriod();
+        if (isPortrait) {
+            updateAllPortrait();
+        } else {
+            updateAllLandscape();
         }
 
 
+    }
+
+    public void updateAllPortrait() {
+        updateHomeScore();
+        updateHomeFoul();
+        updateHomeTimeout();
+        updateAwayScore();
+        updateAwayFoul();
+        updateAwayTimeout();
+        updatePeriod();
+    }
+
+    public void updateAllLandscape() {
+        updateHomeScore();
+        updateAwayScore();
+        updatePeriod();
     }
 
 
