@@ -85,12 +85,12 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/digitaldismay"
         android:padding="20dp"
-        android:shadowColor="#ff8000"
+        android:shadowColor="@color/mainclock_color"
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="40"
         android:text="@string/starting_time"
-        android:textColor="#ff6f00"
+        android:textColor="@color/mainclock_color"
         android:textSize="120sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -133,7 +133,7 @@
         android:fontFamily="@font/digitaldismay"
         android:padding="20dp"
         android:text="@string/placeholder2"
-        android:textColor="#18160e"
+        android:textColor="@color/score_background_color"
         android:textSize="100sp"
         app:layout_constraintEnd_toStartOf="@id/period"
         app:layout_constraintStart_toStartOf="parent"
@@ -146,7 +146,7 @@
         android:fontFamily="@font/digitaldismay"
         android:padding="20dp"
         android:text="@string/placeholder2"
-        android:textColor="#28261c"
+        android:textColor="@color/score_background_color"
         android:textSize="100sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.8"
@@ -249,7 +249,7 @@
         android:background="@drawable/shotclock_border"
         android:fontFamily="@font/digitaldismay"
         android:padding="20dp"
-        android:text="88"
+        android:text="@string/_88"
         android:textColor="#1d1414"
         android:textSize="100sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -519,14 +519,28 @@
         app:layout_constraintTop_toTopOf="@id/away_timeouts" />
 
     <ImageButton
+        android:id="@+id/sound_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/circle"
+        android:background="@drawable/sound_btn"
         android:src="@drawable/sound_icon"
+        android:onClick="playSound"
         app:layout_constraintBottom_toBottomOf="@id/home_title"
         app:layout_constraintLeft_toLeftOf="@id/main_clock"
         app:layout_constraintRight_toRightOf="@id/main_clock"
         app:layout_constraintTop_toTopOf="@id/home_title" />
+
+    <CheckBox
+        android:id="@+id/lock_mode"
+        android:foreground="@drawable/unlocked_locked"
+        android:background="#000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="15dp"
+        android:buttonTint="#000"
+        android:onClick="lockOrientation"/>
 
 
 </android.support.constraint.ConstraintLayout>

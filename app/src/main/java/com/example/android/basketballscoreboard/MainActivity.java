@@ -1,11 +1,18 @@
 package com.example.android.basketballscoreboard;
 
+import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.media.Image;
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.GridLayoutAnimationController;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -18,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static final long MAIN_START_TIME_MILLI = 720000;           //Starting main clock time constant
-    private static final long SHOT_CLOCK_START_TIME_MILLI = 24000;     //Starting shot clock time constant
+    private static final long SHOT_CLOCK_START_TIME_MILLI = 24000;      //Starting shot clock time constant
 
     private TextView mainClock;
     private TextView shotClock;
@@ -27,12 +34,13 @@ public class MainActivity extends AppCompatActivity {
     private Button setFourteenButton;
     private Button resetTimers;
 
-    private CountDownTimer mCountDownTimer;
-    private CountDownTimer sCountDownTimer;
+    private CountDownTimer mCountDownTimer;                             //Main clock CountDownTimer
+    private CountDownTimer sCountDownTimer;                             //Shot clock CountDownTimer
 
     private boolean isPortrait;
     private boolean isMainClockRunning;
     private boolean isShotClockRunning;
+    private boolean orientationLocked = false;
 
     private long mainTimeLeftMilli = MAIN_START_TIME_MILLI;
     private long shotClockTimeLeftMilli = SHOT_CLOCK_START_TIME_MILLI;
@@ -61,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         resetShotClock = findViewById(R.id.reset_shotclock_btn);
         setFourteenButton = findViewById(R.id.set_14);
         resetTimers = findViewById(R.id.reset_time_btn);
+        isPortrait = this.getResources().getBoolean(R.bool.is_portrait);
 
 
         startPause.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     /*
     Method called upon orientation change
+    
      */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -115,8 +125,7 @@ public class MainActivity extends AppCompatActivity {
         resetShotClock = findViewById(R.id.reset_shotclock_btn);
         setFourteenButton = findViewById(R.id.set_14);
         resetTimers = findViewById(R.id.reset_time_btn);
-        Toast toastMessage = new Toast(this);
-
+        String mode;
 
 
         if (isMainClockRunning) {
@@ -124,14 +133,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (isPortrait) {
-            toastMessage.makeText(this, "Referee Mode",
-                    Toast.LENGTH_LONG).show();
+            mode = "Referee Mode";
             updateAllPortrait();
         } else {
-            toastMessage.makeText(this, "Free Mode",
-                    Toast.LENGTH_LONG).show();
+            mode = "Free Mode";
             updateAllLandscape();
         }
+        Toast.makeText(this, mode, Toast.LENGTH_LONG).show();
         updateMainClock();
         updateShotClock();
 
@@ -331,15 +339,13 @@ public class MainActivity extends AppCompatActivity {
 
     /*
      Updates the shot clock TextView with formatted time string (00)
-     updateMainClock()
+     updateShotClock()
      returns: void
      */
 
     public void updateShotClock() {
         int seconds = (int) (shotClockTimeLeftMilli / 1000) % 60;
         String timeFormat = String.format(Locale.getDefault(), "%02d", seconds);
-
-
         shotClock.setText(timeFormat);
 
     }
@@ -348,10 +354,22 @@ public class MainActivity extends AppCompatActivity {
     //The next few methods are used for the period, scoring, fouls, and timeouts.
 
 
+    /*
+     Adds 1 point to Home Score and updates view
+     addHomeScore()
+     returns: void
+     */
+
     public void addHomeScore(View view) {
         homeScore++;
         updateHomeScore();
     }
+
+    /*
+     Subtracts 1 point from Home Score and updates view
+     minusHomeScore()
+     returns: void
+     */
 
     public void minusHomeScore(View view) {
         if (homeScore > 0) {
@@ -359,6 +377,12 @@ public class MainActivity extends AppCompatActivity {
         }
         updateHomeScore();
     }
+
+    /*
+     Updates the Home Score TextView with formatted string.
+     updateHomeScore()
+     returns: void
+     */
 
     public void updateHomeScore() {
         TextView homeScoreText = findViewById(R.id.home_score);
@@ -374,10 +398,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /*
+     Adds 1 point to Away Score and updates view
+     addAwayScore()
+     returns: void
+     */
+
     public void addAwayScore(View view) {
         awayScore++;
         updateAwayScore();
     }
+
+    /*
+     Subtracts 1 point from Away Score and updates view
+     minusAwayScore()
+     returns: void
+     */
 
     public void minusAwayScore(View view) {
         if (awayScore > 0) {
@@ -385,6 +421,12 @@ public class MainActivity extends AppCompatActivity {
         }
         updateAwayScore();
     }
+
+   /*
+    Updates the Away Score TextView with formatted string.
+    addAwayScore()
+    returns: void
+    */
 
     public void updateAwayScore() {
         TextView awayScoreText = findViewById(R.id.away_score);
@@ -399,12 +441,24 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     Adds 1 to Period and updates view, stops adding at 4.
+     addPeriod()
+     returns: void
+     */
+
     public void addPeriod(View view) {
         if (period < 4) {
             period++;
         }
         updatePeriod();
     }
+
+    /*
+     Subtracts 1 from Period and updates view, stops subtracting at 1.
+     minusPeriod()
+     returns: void
+     */
 
     public void minusPeriod(View view) {
         if (period > 1) {
@@ -413,16 +467,34 @@ public class MainActivity extends AppCompatActivity {
         updatePeriod();
     }
 
+    /*
+     Updates the Period TextView.
+     updatePeriod()
+     returns: void
+     */
+
     public void updatePeriod() {
         TextView periodText = findViewById(R.id.period_number);
         String periodString = String.valueOf(period);
         periodText.setText(periodString);
     }
 
+    /*
+     Adds 1 to Home Foul and updates view.
+     addHomeFoul()
+     returns: void
+     */
+
     public void addHomeFoul(View view) {
         homeFouls++;
         updateHomeFoul();
     }
+
+    /*
+     Subtracts 1 from Home Foul and updates view, stops subtracting at 0.
+     minusHomeFoul()
+     returns: void
+     */
 
     public void minusHomeFoul(View view) {
         if (homeFouls > 0) {
@@ -431,16 +503,34 @@ public class MainActivity extends AppCompatActivity {
         updateHomeFoul();
     }
 
+    /*
+     Updates the Home Foul TextView.
+     updateHomeFoul()
+     returns: void
+     */
+
     public void updateHomeFoul() {
         TextView homeFoulText = findViewById(R.id.home_fouls);
         String homeFoulString = String.valueOf(homeFouls);
         homeFoulText.setText(homeFoulString);
     }
 
+    /*
+     Adds 1 to Away Foul and updates view.
+     addAwayFoul()
+     returns: void
+     */
+
     public void addAwayFoul(View view) {
         awayFouls++;
         updateAwayFoul();
     }
+
+    /*
+     Subtracts 1 from Away Foul and updates view, stops subtracting at 0.
+     minusAwayFoul()
+     returns: void
+     */
 
     public void minusAwayFoul(View view) {
         if (awayFouls > 0) {
@@ -449,11 +539,23 @@ public class MainActivity extends AppCompatActivity {
         updateAwayFoul();
     }
 
+    /*
+     Updates the Away Foul TextView.
+     updateAwayFoul()
+     returns: void
+     */
+
     public void updateAwayFoul() {
         TextView awayFoulText = findViewById(R.id.away_fouls);
         String awayFoulString = String.valueOf(awayFouls);
         awayFoulText.setText(awayFoulString);
     }
+
+    /*
+     Adds 1 to Home Timeout and updates view, stops adding at 6.
+     addHomeTimeout()
+     returns: void
+     */
 
     public void addHomeTimeout(View view) {
         if (homeTimeouts < 6) {
@@ -462,6 +564,12 @@ public class MainActivity extends AppCompatActivity {
         updateHomeTimeout();
     }
 
+    /*
+     Subtracts 1 from Home Timeout and updates view, stops subtracting at 0.
+     minusHomeTimeout()
+     returns: void
+     */
+
     public void minusHomeTimeout(View view) {
         if (homeTimeouts > 0) {
             homeTimeouts--;
@@ -469,11 +577,23 @@ public class MainActivity extends AppCompatActivity {
         updateHomeTimeout();
     }
 
+    /*
+     Updates the Home Timeout TextView.
+     updateHomeTimeout()
+     returns: void
+     */
+
     public void updateHomeTimeout() {
         TextView homeTimeoutText = findViewById(R.id.home_timeouts);
         String homeTimeoutString = String.valueOf(homeTimeouts);
         homeTimeoutText.setText(homeTimeoutString);
     }
+
+    /*
+     Adds 1 to Away Timeout and updates view, stops adding at 6.
+     addAwayTimeout()
+     returns: void
+     */
 
     public void addAwayTimeout(View view) {
         if (awayTimeouts < 6) {
@@ -482,6 +602,13 @@ public class MainActivity extends AppCompatActivity {
         updateAwayTimeout();
     }
 
+    /*
+     Subtracts 1 from Away Timeout and updates view, stops subtracting at 0.
+     addAwayTimeout()
+     returns: void
+     */
+
+
     public void minusAwayTimeout(View view) {
         if (awayTimeouts > 0) {
             awayTimeouts--;
@@ -489,11 +616,24 @@ public class MainActivity extends AppCompatActivity {
         updateAwayTimeout();
     }
 
+    /*
+     Updates the Away Timeout TextView.
+     updateAwayTimeout()
+     returns: void
+     */
+
     public void updateAwayTimeout() {
         TextView awayTimeoutText = findViewById(R.id.away_timeouts);
         String awayTimeoutString = String.valueOf(awayTimeouts);
         awayTimeoutText.setText(awayTimeoutString);
     }
+
+    /*
+     If in Portrait (Referee Mode), resets the Scores, Period, Fouls, and Timeouts to their starting values.
+     If in Landscape (Free Mode), resets the Scores and Period to their starting values.
+     resetScore()
+     returns: void
+     */
 
     public void resetScore(View view) {
         isPortrait = this.getResources().getBoolean(R.bool.is_portrait);
@@ -514,6 +654,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /*
+     Updates the TextViews of all variables available in Portrait (Referee Mode)
+     updateAllPortrait()
+     returns: void
+     */
+
     public void updateAllPortrait() {
         updateHomeScore();
         updateHomeFoul();
@@ -524,10 +670,54 @@ public class MainActivity extends AppCompatActivity {
         updatePeriod();
     }
 
+    /*
+     Updates the TextViews of all variables available in Landscape (Free Mode)
+     updateAllLandscape()
+     returns: void
+     */
+
     public void updateAllLandscape() {
         updateHomeScore();
         updateAwayScore();
         updatePeriod();
+    }
+
+    /*
+     Plays buzzer sound for 1 second (1000 milliseconds).
+     playSound()
+     returns: void
+     */
+
+    public void playSound(View view) {
+        final MediaPlayer buzzer = MediaPlayer.create(this, R.raw.buzzer);
+        CountDownTimer soundTimer = new CountDownTimer(1000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                buzzer.start();
+            }
+
+            public void onFinish() {
+                buzzer.stop();
+                buzzer.release();
+            }
+        };
+        soundTimer.start();
+
+    }
+
+    /*
+     Locks and unlocks screen orientation.
+     lockOrientation()
+     returns: void
+     */
+
+    public void lockOrientation(View view) {
+        if (!orientationLocked) {
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+            orientationLocked = true;
+        } else {
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+            orientationLocked = false;
+        }
     }
 
 

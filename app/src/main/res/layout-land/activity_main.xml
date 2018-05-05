@@ -80,12 +80,12 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/digitaldismay"
         android:padding="10dp"
-        android:shadowColor="#ff6f00"
+        android:shadowColor="@color/mainclock_color"
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="40"
         android:text="@string/starting_time"
-        android:textColor="#ff6f00"
+        android:textColor="@color/mainclock_color"
         android:textSize="150sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -320,10 +320,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:background="@drawable/circle"
+        android:background="@drawable/sound_btn"
+        android:onClick="playSound"
         android:src="@drawable/sound_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <CheckBox
+        android:id="@+id/lock_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="#000"
+        android:buttonTint="#000"
+        android:foreground="@drawable/unlocked_locked"
+        android:onClick="lockOrientation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
