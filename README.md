@@ -1,5 +1,7 @@
 # Basketball-Scoreboard-App
 Keep track of Basketball Games with this portable scoreboard application for Android.
+
+### Specifications
 Min SDK: 16 
 Target SDK: 26
 
