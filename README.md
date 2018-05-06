@@ -1,7 +1,7 @@
 # Basketball-Scoreboard-App
 Keep track of Basketball Games with this portable scoreboard application for Android. 
 
-## API 
+## API Level
 minSdkVersion: 16  
 targetSdkVersion: 26
 
