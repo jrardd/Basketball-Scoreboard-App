@@ -2,5 +2,6 @@
 Keep track of Basketball Games with this portable scoreboard application for Android.
 
 ## Screenshots
-![basketball scoreboard app](https://user-images.githubusercontent.com/29515038/39668404-b89b543c-5081-11e8-91f6-5adbbc07955d.png)
+![basketball scoreboard](https://user-images.githubusercontent.com/29515038/39671110-e35cc9f4-50c6-11e8-861e-a8c2919da019.png)
+
 
